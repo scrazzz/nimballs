@@ -1,3 +1,6 @@
+# Learning Nim
+# Part 2: CLI based IP lookup
+
 import std/httpclient
 import strformat
 import json

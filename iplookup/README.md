@@ -1,3 +1,7 @@
+```shell
+nim -r main.py
+```
+
 ```
 Enter an IP address: 1.1.1.1
 ================ IP ================
