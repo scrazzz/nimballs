@@ -1,5 +1,5 @@
 ```shell
-nim -r main.py
+nim -r main.nim
 ```
 
 ```
