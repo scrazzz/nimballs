@@ -14,14 +14,6 @@ type
         isp: string
         domain: string
 
-# type
-#     Security = object
-#         anonymous: bool
-#         proxy: bool
-#         vpn: bool
-#         tor: bool
-#         hosting: bool
-
 type
     Result = object
         ip: string
@@ -31,15 +23,23 @@ type
         calling_code: string
         capital: string
         connection: Connection
-        # security: Security
 
 var client = newHttpClient()
 stdout.write("Enter an IP address: ")
 var input = stdin.readLine()
 
-var resp = client.getContent(BASE_URL & fmt"/{input}")
-var content = parseJson(resp)
-var result = to(content, Result)
+var resp = client.request(
+    BASE_URL & fmt"/{input}",
+    httpMethod = HttpGet
+)
+
+var content = parseJson(resp.body)
+var result: Result
+try:
+    result = to(content, Result)
+except KeyError:
+    echo "\n[!] Invalid IP given"
+    quit(0)
 var conn = result.connection
 
 echo "================ IP ================"
