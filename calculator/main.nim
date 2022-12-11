@@ -17,29 +17,28 @@ proc get_number_input(input: string): int =
         quit(0)
 
 proc get_operator(op: string): string =
-    if op in @["+", "-", "/", "*"]:
-        return op
-    else:
+    if op notin ["+", "-", "/", "*"]:
         echo "Not a valid operator!"
         quit(0)
+    return op
 
-echo "Enter a number: "
+stdout.write("Enter a number: ")
 x = get_number_input(stdin.readLine())
 
-echo "Enter an operator"
+stdout.write("Enter an operator: ")
 op = get_operator(stdin.readLine())
 
-echo "Enter another number"
+stdout.write("Enter another number: ")
 y = get_number_input(stdin.readLine())
 
-case op:
-    of "+":
-        echo fmt"Answer: {x + y}"
-    of "-":
-        echo fmt"Answer: {x - y}"
-    of "/":
-        echo fmt"Answer: {x / y}"
-    of "*":
-        echo fmt"Answer: {x * y}"
-    else:
-        echo "Unknown operator"
+case op
+of "+":
+    echo fmt"Answer: {x + y}"
+of "-":
+    echo fmt"Answer: {x - y}"
+of "/":
+    echo fmt"Answer: {x / y}"
+of "*":
+    echo fmt"Answer: {x * y}"
+else:
+    echo "Unknown operator"

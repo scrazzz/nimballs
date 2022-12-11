@@ -7,40 +7,38 @@ import json
 
 const BASE_URL = "http://ipwho.is"
 
-type
-    Connection = object
-        asn: int
-        org: string
-        isp: string
-        domain: string
+type Connection = object
+    asn: int
+    org: string
+    isp: string
+    domain: string
 
-type
-    Result = object
-        ip: string
-        country: string
-        city: string
-        postal: string
-        calling_code: string
-        capital: string
-        connection: Connection
+type Result = object
+    ip: string
+    country: string
+    city: string
+    postal: string
+    calling_code: string
+    capital: string
+    connection: Connection
 
-var client = newHttpClient()
+let client = newHttpClient()
 stdout.write("Enter an IP address: ")
-var input = stdin.readLine()
+let input = stdin.readLine()
 
-var resp = client.request(
+let resp = client.request(
     BASE_URL & fmt"/{input}",
     httpMethod = HttpGet
 )
 
-var content = parseJson(resp.body)
+let content = parseJson(resp.body)
 var result: Result
 try:
     result = to(content, Result)
 except KeyError:
     echo "\n[!] Invalid IP given"
     quit(0)
-var conn = result.connection
+let conn = result.connection
 
 echo "================ IP ================"
 echo &"IP       : {result.ip}"
