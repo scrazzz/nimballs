@@ -1,5 +1,5 @@
 ```shell
-nim -r main.nim
+nim -r ipinfo.nim
 ```
 
 ```
