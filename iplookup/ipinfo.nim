@@ -22,26 +22,23 @@ type Result = object
 
 proc ask_ip(): string =
     stdout.write("Enter an IP addr: ")
-    let input = stdin.readLine()
-    return input
+    return stdin.readLine()
 
 let client = newHttpClient()
 var input: string
+
 if paramCount() != 1:
     input = ask_ip()
 else:
-  input = paramStr(1)
-
-#stdout.write("Enter an IP address: ")
-#let input = stdin.readLine()
+    input = paramStr(1)
 
 let resp = client.request(
     fmt"{BASE_URL}/{input}",
     httpMethod = HttpGet
 )
-
 let content = parseJson(resp.body)
 var result: Result
+
 try:
     result = content.to(Result)
 except KeyError:
